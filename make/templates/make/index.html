@@ -1,0 +1,41 @@
+{%extends "make/templates.html"%}
+
+{%block body%}
+
+<div class="box">
+    <h1>二维码生成</h1>
+    <hr>
+    <form id="url">
+        <input type="text" id="urlget" />
+        <input type="submit" />
+    </form>
+    <div id="picture"></div>
+
+</div>
+
+<script>
+    const form = document.getElementById("url");
+
+
+    form.addEventListener("submit", function (event) {
+        // Prevent the default form submission behavior
+        event.preventDefault();
+
+        // Get the input element by id
+        const input = document.getElementById("urlget");
+
+        // Get the value of the input element
+        let url = input.value;
+        url = url.replace(/\//g, "^");
+
+        // Get the div element by id
+        const div = document.getElementById("picture");
+
+        // Append the img element to the div element 
+        div.innerHTML = `<img src="/process/${url}">`; 
+
+    });
+</script>
+
+
+{%endblock%}
