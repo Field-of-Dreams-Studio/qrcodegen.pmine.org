@@ -19,3 +19,12 @@ def make(request, url):
     response = FileResponse(b, content_type="image/png") 
     response["Content-Disposition"] = f"inline; filename={url}.png" 
     return response 
+
+def get(request, info): 
+    qr_code = pyqrcode.create(info)
+    b = io.BytesIO() 
+    qr_code.png(b, scale=8) 
+    b.seek(0)  
+    response = FileResponse(b, content_type="image/png") 
+    response["Content-Disposition"] = f"inline; filename={info}.png" 
+    return response 

@@ -4,37 +4,41 @@
 
 <div class="box">
     <h1>二维码生成</h1>
-    <hr>
+    <hr> 
+    请在下方的输入框中输入 URL ，其他用户可以通过扫描二维码进入网站 
     <form id="url">
         <input type="text" id="urlget" />
-        <input type="submit" />
-    </form>
-    <div id="picture"></div>
-
+        <input type="submit" /> 
+    </form> 
+    <div id="picture" style="height: 350px; width: 350px"></div> 
+    <hr> 
+    请在下方的输入框中输入文字，其他用户可以通过扫描二维码获取文字（注意不会进入链接，如果有连接需求请使用上面的生成器！） 
+    <form id="info">
+        <input type="text" id="infoget" />
+        <input type="submit" /> 
+    </form> 
+    <div id="picture2" style="height: 350px; width: 350px"></div> 
 </div>
 
 <script>
-    const form = document.getElementById("url");
-
+    const form = document.getElementById("url"); 
+    const info = document.getElementById("info"); 
 
     form.addEventListener("submit", function (event) {
-        // Prevent the default form submission behavior
         event.preventDefault();
-
-        // Get the input element by id
         const input = document.getElementById("urlget");
-
-        // Get the value of the input element
         let url = input.value;
         url = url.replace(/\//g, "^");
-
-        // Get the div element by id
         const div = document.getElementById("picture");
+        div.innerHTML = `<img src="/url/${url}" style="height: 350px; width: 350px">`;  
+    });  
 
-        // Append the img element to the div element 
-        div.innerHTML = `<img src="/process/${url}">`; 
-
-    });
+    info.addEventListener("submit", function (event) {
+        event.preventDefault();
+        const input = document.getElementById("infoget");
+        const div = document.getElementById("picture2");
+        div.innerHTML = `<img src="/info/${input.value}" style="height: 350px; width: 350px">`;  
+    });  
 </script>
 
 
